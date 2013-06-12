@@ -1,0 +1,11 @@
+.submenu > div{
+	margin-top:20px;
+	margin-bottom:20px;
+}
+.modal-header {
+	background-color: #CBEEFF;
+}
+
+.modal-footer {
+	background-color: #E0F5FF;
+}

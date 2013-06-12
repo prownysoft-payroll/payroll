@@ -1,0 +1,59 @@
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+	<strong>Tambah Data Absensi</strong>
+</div>
+<div class="modal-body">
+	<form class="form-horizontal">
+		<div class="control-group">
+			<label class="control-label" for="inputCode">Nama</label>
+			<div class="controls">
+				<div class="input-append">
+					<input type="text" id="inputName" name="Name" class="span3" readonly>
+					<button class="btn btn-primary" type="button" title="Cari nama"><i class="icon-white icon-search"></i></button>
+				</div>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label" for="inputName">Tanggal</label>
+			<div class="controls">
+				<div class="input-append date" id="inputDate" data-date-format="dd-mm-yyyy">
+					<input type="text" name="Date" class="input input-small" readonly>
+					<button class="btn btn-primary"><i class="icon-white icon-calendar"></i></button>
+				</div>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label" for="inputStatus">Status</label>
+			<div class="controls">
+				<select id="inputStatus" name="Status">
+					<option value="Hadir">Hadir</option>
+					<option value="Tidak hadir">Tidak hadir</option>
+					<option value="Cuti">Cuti</option>
+					<option value="Izin">Izin</option>
+				</select>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label" for="inputDateIn">Jam Masuk</label>
+			<div class="controls">
+				<input type="text" id="inputDateIn" name="DateIn" class="span3">
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label" for="inputDateOut">Jam Keluar</label>
+			<div class="controls">
+				<input type="text" id="inputDateOut" name="DateOut" class="span3">
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label" for="inputNote">Catatan</label>
+			<div class="controls">
+				<textarea id="inputNote" name="Note" class="span3"></textarea>
+			</div>
+		</div>
+	</form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-success btn-small">Simpan</button>
+    <button type="button" data-dismiss="modal" class="btn btn-small">Tutup</button>
+</div>

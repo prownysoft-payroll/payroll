@@ -1,0 +1,182 @@
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+	<strong>Tambah Data Karyawan</strong>
+</div>
+<div class="modal-body">
+	<form class="form-horizontal">
+		<div class="span5">
+			<div class="control-group">
+				<label class="control-label" for="input_id">ID</label>
+				<div class="controls">
+					<input type="text" id="input_id" name="_id" placeholder="ID" class="span3">
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="inputName">Nama</label>
+				<div class="controls">
+					<input type="text" id="inputName" name="Name" class="span3">
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="inputGender">Jenis Kelamin</label>
+				<div class="controls">
+					<select id="inputGender" name="Gender" class="span3">
+						<option value=0 selected>Pria</option>
+						<option value=1>Wanita</option>
+					</select>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="inputBirthPlace">Tempat Lahir</label>
+				<div class="controls">
+					<input type="text" id="inputBirthPlace" name="BirthPlace" class="span3">
+				</div>
+			</div>
+			<div class="control-group input-append">
+				<label class="control-label" for="inputBirthDate">Tanggal Lahir</label>
+				<div class="controls">
+					<input type="text" class="input-small" id="inputBirthDate" name="BirthDate" data-date-format="dd-mm-yyyy" readonly class="span3"><span class="add-on"><i class="icon-th"></i></span>
+				</div>
+			</div>
+		</div>
+		<div class="span5">
+			<div class="control-group span2">
+				<img src="..." class="img-polaroid" style="width:100%; display:block; margin-bottom:10px;">
+				<div class="btn-group" style="margin-left: auto; margin-right: auto; display: table;">
+					<button type="button" class="btn btn-mini btn-success "><i class="icon-plus icon-white"></i></button>
+					<button type="button" class="btn btn-mini btn-danger"><i class="icon-remove icon-white"></i></button>
+				</div>
+			</div>
+		</div>
+		<div class="span11"><hr></div>
+
+		<div class="span5">
+			<div class="control-group">
+				<label class="control-label" for="inputMartialStatus">Martial Status</label>
+				<div class="controls">
+					<select id="inputMartialStatus" name="MartialStatus" class="span3">
+						<option value=0>Belum Menikah</option>
+						<option value=1>Menikah</option>
+					</select>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="inputSignatureType">Tanda Pengenal</label>
+				<div class="controls">
+					<select id="inputSignatureType" name="SignatureType" class="span3">
+						<option value=0>N/A</option>
+						<option value=1>KTP</option>
+						<option value=2>Pasport</option>
+					</select>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="inputSignatureNo">No Pengenal</label>
+				<div class="controls">
+					<input type="text" id="inputSignatureNo" name="SignatureNo" class="span3">
+				</div>
+			</div>
+		</div>
+		<div class="span5">
+			<div class="control-group">
+				<label class="control-label" for="inputTarifPTKP">Tarif PTKP</label>
+				<div class="controls">
+					<select id="inputTarifPTKP" name="TarifPTKP" class="span3">
+						<option value=0>K/0</option>
+						<option value=1>K/1</option>
+						<option value=1>K/2</option>
+					</select>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="inputNPWP">NPWP</label>
+				<div class="controls">
+					<input type="text" id="inputNPWP" name="NPWP" class="span3">
+				</div>
+			</div>
+			<div class="control-group input-append">
+				<label class="control-label" for="inputNPWPDate">Tanggal NPWP</label>
+				<div class="controls">
+					<input type="text" class="input-small" id="inputNPWPDate" name="NPWPDate" data-date-format="dd-mm-yyyy" readonly class="span3"><span class="add-on"><i class="icon-th"></i></span>
+				</div>
+			</div>
+		</div>
+		<div class="span11"><hr></div>
+
+		<div class="span5">
+			<div class="control-group">
+				<label class="control-label" for="inputTelpNo1">Telpon 1</label>
+				<div class="controls">
+					<input type="text" id="inputTelpNo1" name="TelpNo1" class="span3">
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="inputTelpNo2">Telpon 2</label>
+				<div class="controls">
+					<input type="text" id="inputTelpNo2" name="TelpNo2" class="span3">
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="inputHp">Hp</label>
+				<div class="controls">
+					<input type="text" id="inputHp" name="Hp" class="span3">
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="inputAddressNo1">Alamat 1</label>
+				<div class="controls">
+					<textarea id="inputAddressNo1" name="AddressNo1" class="span3"></textarea>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="inputAddressNo2">Alamat 2</label>
+				<div class="controls">
+					<textarea id="inputAddressNo2" name="AddressNo2" class="span3"></textarea>
+				</div>
+			</div>
+		</div>
+		<div class="span5">
+			<div class="control-group">
+				<label class="control-label" for="inputCity">Kota</label>
+				<div class="controls">
+					<input type="text" id="inputCity" name="City" class="span3">
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="inputFax">Fax</label>
+				<div class="controls">
+					<input type="text" id="inputFax" name="Fax" class="span3">
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="inputEmail">Email</label>
+				<div class="controls">
+					<input type="text" id="inputEmail" name="Email" class="span3">
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="inputWebsite">Website</label>
+				<div class="controls">
+					<input type="text" id="inputWebsite" name="Website" class="span3">
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="inputZip">Zip</label>
+				<div class="controls">
+					<input type="text" id="inputZip" name="Zip" class="span3">
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="inputNegara">Negara</label>
+				<div class="controls">
+					<input type="text" id="inputNegara" name="Negara" class="span3">
+				</div>
+			</div>
+		</div>
+		<div class="clearfix"></div>
+	</form>
+</div>
+<div class="modal-footer">
+	<button type="button" class="btn btn-success btn-small">Simpan</button>
+	<button type="button" data-dismiss="modal" class="btn  btn-small">Tutup</button>
+</div>

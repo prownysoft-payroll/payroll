@@ -1,0 +1,14 @@
+#data_master-data_karyawan-create .modal-body hr{
+	margin: 0px;
+	margin-bottom: 20px;
+	border-top: 2px solid #D8D8D8;
+}
+
+@media (max-width: 979px) and (min-width: 768px){
+	#data_master-data_karyawan-create .form-horizontal .control-label {
+		width: 100px;
+	}
+	#data_master-data_karyawan-create .form-horizontal .controls{
+		margin-left: 120px;
+	}
+}
