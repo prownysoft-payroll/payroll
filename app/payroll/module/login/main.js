@@ -34,7 +34,7 @@ define([
 	'backbone',
 	'namespace',
 	'eventAggregator',
-	'view.js'
+	'login.js'
 ], function($, _, Backbone,ns, eventAggregator, View){
 	$(function(){
 		this.view = new View();
