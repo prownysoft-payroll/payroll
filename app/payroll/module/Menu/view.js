@@ -2,9 +2,10 @@ define([
 		'backbone',
 		'namespace',
 		'fn',
+		'eventAggregator',
 	URL_APP + 'module/menu/model.js',
 		'text!' + URL_APP + 'module/menu/template.html'
-], function(Backbone, ns, fn, Model, template) {
+], function(Backbone, ns, fn, eventAggregator, Model, template) {
 	ns.define('payroll.module.menu');
 	payroll.module.menu.View = Backbone.View.extend({
 		id: 'menuView',
@@ -16,6 +17,16 @@ define([
 
 			this.$el.html(this.template());
 			return this;
+		},
+		events:{
+			'click .logout':'logout'
+		},
+		logout: function(){
+			$.ajax({
+				url:URL_SERVER+'login/logout',
+				async: false
+			});
+			eventAggregator.trigger('loadFormLoginOrMenu');
 		}
 	});
 

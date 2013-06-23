@@ -20,8 +20,7 @@ requirejs.config({
 			exports: '_'
 		},
 		'namespace': {
-			deps: ['underscore'],
-			exports: 'ns'
+			deps: ['underscore']
 		},
 		'bootstrap': {
 			deps: ['jquery']
@@ -37,7 +36,8 @@ requirejs.config({
 			exports: 'Backbone'
 		},
 		'eventAggregator': {
-			deps: ['namespace', 'backbone']
+			deps: ['namespace', 'backbone'],
+			exports: 'eventAggregator'
 		}
 	}
 });
@@ -45,27 +45,34 @@ requirejs.config({
 define([
 		'backbone',
 		'fn',
+		'eventAggregator',
 		'bootbox',
-
-], function(Backbone,fn) {
+], function(Backbone, fn, eventAggregator) {
 	$(function() {
 		Backbone.history.start();
 
-		$.ajax({
-			url: URL_SERVER + 'login',
-			error: function(xhr, status, error) {
-				var data = JSON.parse(xhr.responseText);
-				if (data.short_message == "wrong login") {
-					require(["login"], function(Login) {
-						var login = new Login();
-						$('body > .container').html(login.render().$el);
-						login.$("input").first().focus();
-					})
-				} else if (data.short_message == "already login")
-					fn.loadMenu();
-				else
-					bootbox.alert(ERROR_SERVER);
-			}
+		eventAggregator.on('loadFormLoginOrMenu',function(){
+
+			$.ajax({
+				url: URL_SERVER + 'login',
+				error: function(xhr, status, error) {
+					var data = JSON.parse(xhr.responseText);
+					if (data.short_message == "wrong login") {
+						require(["login"], function(Login) {
+							var login = new Login();
+							$('body').empty();
+							$('body').append("<div class='container'></div>");
+							$('.container').html(login.render().$el);
+							login.$("input").first().focus();
+						})
+					} else if (data.short_message == "already login")
+						fn.loadMenu();
+					else
+						bootbox.alert(ERROR_SERVER);
+				}
+			});
 		});
+
+		eventAggregator.trigger('loadFormLoginOrMenu');
 	});
 });

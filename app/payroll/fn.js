@@ -22,8 +22,7 @@ define([
             						</div>\
             					</div>\
             				</div>");
-
-						$('body > .container').html(menu.render().$el);
+						$('.container').html(menu.render().$el);
 					});
 				},
 				error: function(xhr, status, error) {
