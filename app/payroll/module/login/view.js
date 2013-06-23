@@ -1,18 +1,16 @@
 define([
-		'jquery',
-		'underscore',
 		'backbone',
 		'namespace',
+		'fn',
+	URL_APP + 'module/login/model.js',
 		'text!../../app/payroll/module/login/template.html',
-		'jqBootstrapValidation'
-], function($, _, Backbone, ns, template) {
+		'jqBootstrapValidation',
+		'bootbox'
+], function(Backbone, ns, fn, Model, template) {
 	ns.define('payroll.module.login');
 	payroll.module.login.View = Backbone.View.extend({
 		id: 'formLogin',
 		initialize: function() {
-			var Model = Backbone.Model.extend({
-				url: url_server+'login'
-			});
 			this.model = new Model();
 		},
 		template: _.template(template),
@@ -20,10 +18,10 @@ define([
 			var self = this;
 			this.$el.html(this.template());
 			this.$('input').jqBootstrapValidation({
-				submitError: function($form, event, error){
+				submitError: function($form, event, error) {
 					self.$('.alert').remove();
 				},
-				submitSuccess: function($form, event){
+				submitSuccess: function($form, event) {
 					event.preventDefault();
 					self.$('.alert').remove();
 					self.submit();
@@ -40,24 +38,29 @@ define([
 			var self = this;
 			this.model.fetch({
 				data: this.model.toJSON(),
-				success: function(data) {
-					if (data.success){
-
-					}
+				success: function(model, response, options) {
+					if (response.success) {
+						fn.loadMenu();
+					} else
+						bootbox.alert(ERROR_SERVER);
 				},
-				error: function(data, status, error) {
-					if (status.responseText) {
-						var data = JSON.parse(status.responseText);
-						self.showErrorMessage(data.message);
+				error: function(model, response, options) {
+					if (response.responseText) {
+						var data = JSON.parse(response.responseText);
+						if (data.message) {
+							self.showErrorMessage(data.message);
+							return false;
+						}
 					}
+					bootbox.alert(ERROR_SERVER);
 				},
 				complete: function() {
 					self.$('.btn').removeClass('disabled').removeAttr("disabled");
 				}
 			});
 		},
-		showErrorMessage: function(msg){
-			var html = '<div class="alert alert-error"><button type="button" class="close" data-dismiss="alert">x</button><span>'+msg+'</span></div>';
+		showErrorMessage: function(msg) {
+			var html = '<div class="alert alert-error"><button type="button" class="close" data-dismiss="alert">x</button><span>' + msg + '</span></div>';
 			this.$('.alert').remove();
 			this.$('button').after(html);
 		}

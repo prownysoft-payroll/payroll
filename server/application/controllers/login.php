@@ -16,7 +16,7 @@
 			{
 				if ($this->Model_login->is_already_login())
 				{
-					$array = array("success" => false, "message" =>"anda sudah login sebelumnya dengan nama <b>".$this->session->userdata('username')."</b>", "short_message"=>"alerady login");
+					$array = array("success" => false, "message" =>"anda sudah login sebelumnya dengan nama <b>".$this->session->userdata('username')."</b>", "short_message"=>"already login");
 					$this->output->set_output(json_encode($array));
 					return FALSE;
 				}

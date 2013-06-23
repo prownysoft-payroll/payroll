@@ -41,7 +41,6 @@ define([
 ], function(Backbone, View){
 	$(function(){
 		this.view = new View();
-		$('body > .container').html(this.view.render().$el);
-		this.view.$("input[name='username']").focus();
+		$('.container').html(this.view.render().$el);
 	});
 });

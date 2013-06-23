@@ -28,7 +28,7 @@
 		{
 			if ($this->session->userdata('username') && $this->session->userdata('password'))
 			{
-				$result = $this->query_tbl_user_by_username_password($this->session->userdata('username'), $this->session->userdata('password'));				
+				$result = $this->query_tbl_user_by_username_password($this->session->userdata('username'), $this->session->userdata('password'));
 				if ($result)
 					return TRUE;
 			}

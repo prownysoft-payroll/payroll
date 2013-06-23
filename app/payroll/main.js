@@ -1,7 +1,5 @@
 "use strict";
 define.amd.jQuery = true;
-var url_server = "http://localhost:99/soft/payroll/server/index.php/";
-var url_app = "../../app/payroll/";
 requirejs.config({
 	baseUrl: '../../public/js',
 	paths: {
@@ -11,7 +9,10 @@ requirejs.config({
 		namespace: 'namespace',
 		bootstrap: 'bootstrap.min',
 		jqBootstrapValidation: 'jqbootstrapvalidation',
-		login: url_app + 'module/login/login'
+		bootbox: 'bootbox.min',
+		fn: URL_APP + 'fn',
+		login: URL_APP + 'module/Login/view',
+		menu: URL_APP + 'module/Menu/view'
 	},
 	shim: {
 		'underscore': {
@@ -28,6 +29,9 @@ requirejs.config({
 		'jqBootstrapValidation': {
 			deps: ['jquery']
 		},
+		'bootbox': {
+			deps: ['jquery', 'bootstrap']
+		},
 		'backbone': {
 			deps: ['jquery', 'underscore', 'bootstrap', 'underscore'],
 			exports: 'Backbone'
@@ -39,42 +43,28 @@ requirejs.config({
 });
 
 define([
-		'backbone'
-], function(Backbone) {
+		'backbone',
+		'fn',
+		'bootbox',
+
+], function(Backbone,fn) {
 	$(function() {
 		Backbone.history.start();
+
 		$.ajax({
-			url: url_server + 'login',
-			success: function(data) {
-				console.log(data);
-			},
+			url: URL_SERVER + 'login',
 			error: function(xhr, status, error) {
 				var data = JSON.parse(xhr.responseText);
 				if (data.short_message == "wrong login") {
 					require(["login"], function(Login) {
 						var login = new Login();
-						$('body > .container').empty();
-						$('body > .container').append(login.render().$el);
+						$('body > .container').html(login.render().$el);
 						login.$("input").first().focus();
 					})
-				} else if (data.short_message == "already login") {
-					$.ajax({
-						url: url_server + 'login/get_menus',
-						success: function(data) {
-							console.log(data);
-						},
-						error: function(xhr, status, error) {
-							// if no menut availabel
-							var data = JSON.parse(xhr.responseText);
-							if (typeof data =="object"){
-								if (data.short_message =="already login"){
-									
-								}
-							}
-						}
-					});
-				} else
-					console.log(data.error ? data.message : error)
+				} else if (data.short_message == "already login")
+					fn.loadMenu();
+				else
+					bootbox.alert(ERROR_SERVER);
 			}
 		});
 	});

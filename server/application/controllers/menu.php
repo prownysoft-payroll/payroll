@@ -7,22 +7,20 @@
 			$this->output
 				->set_content_type('application/json')
 				->set_status_header('400');
-
 			$this->Model_login->is_already_login("with message");
+			$this->load->model('Model_menu');
 		}
 
 		public function index(){
+			$result = $this->Model_menu->get_role_and_access();
 
-		}
-
-		public function get_menu()
-		{
-			$result = $this->Model_accessing->get_role();
-			if ($result->num_rows() > 0){
-				$row = $query->row();
-				echo $row->rule();
-			}
-			$this->Model_login->get_role_and_access();
+			if ($result->num_rows() > 0)
+			{
+				$this->output->set_status_header('200');
+				$result->row()->success=true;
+				$this->output->set_output(json_encode($result->row()));
+			}else
+				die(json_encode(array("success" => false, "message" =>"user anda tidak terdaftar lagi, harap menghubungi owner untuk mendaftar dan mendapatkan akses", "short_message"=>"")));
 		}
 	}
 ?>
