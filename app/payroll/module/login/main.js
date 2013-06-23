@@ -15,8 +15,7 @@ requirejs.config({
 			exports: '_'
 		},
 		'namespace': {
-			deps: ['underscore'],
-			export: '_'
+			deps: ['underscore']
 		},
 		'backbone': {
 			deps: ['jquery', 'underscore', 'bootstrap', 'underscore'],

@@ -1,0 +1,14 @@
+#formLogin input{
+	/*margin-bottom: 0px;*/
+
+}
+#formLogin .help-block ul{
+	font-size: 11px;
+	list-style-type: none;
+	margin: 0 0 0px 10px;
+	text-align: left;
+}
+
+#formLogin button + .alert{
+	margin-top: 10px;
+}

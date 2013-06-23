@@ -1,4 +1,4 @@
-define(['underscore'], function(_) {
+define(['underscore'], function() {
     return {
         define: function(nsString) {
             var nsArr = nsString.split('.'),
