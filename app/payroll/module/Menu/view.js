@@ -9,21 +9,21 @@ define([
 	ns.define('payroll.module.menu');
 	payroll.module.menu.View = Backbone.View.extend({
 		id: 'menuView',
-		initialize: function(){
+		initialize: function() {
 			this.model = new Model();
 		},
 		template: _.template(template),
-		render: function(){
+		render: function() {
 
-			this.$el.html(this.template());
+			this.$el.html(this.template(this.model.attributes));
 			return this;
 		},
-		events:{
-			'click .logout':'logout'
+		events: {
+			'click .logout': 'logout'
 		},
-		logout: function(){
+		logout: function() {
 			$.ajax({
-				url:URL_SERVER+'login/logout',
+				url: URL_SERVER + 'login/logout',
 				async: false
 			});
 			eventAggregator.trigger('loadFormLoginOrMenu');
