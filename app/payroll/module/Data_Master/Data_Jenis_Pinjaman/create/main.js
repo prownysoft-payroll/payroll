@@ -4,8 +4,8 @@ define.amd.jQuery = true;
 requirejs.config({
 	baseUrl: '../../../../../../public/js',
 	paths: {
-		jquery: 'jquery-1.8.0.min',
-		underscore: 'underscore',
+		jquery: 'jquery-1.9.1.min',
+		underscore: 'underscore-min',
 		backbone: 'backbone-min',
 		namespace: 'namespace',
 		bootstrap: 'bootstrap.min',

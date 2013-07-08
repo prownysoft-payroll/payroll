@@ -7,6 +7,13 @@ define([
 	ns.define('component');
 	component.table = Backbone.View.extend({
 		tagName: 'table',
+		className: 'table',
+		initialize: function() {
+			this.collection.on('reset', function() {
+				this.tbody.remove();
+				this.createTbody();
+			}, this)
+		},
 		render: function() {
 			this.$el.empty();
 			this.createThead();
@@ -15,7 +22,7 @@ define([
 		},
 		createThead: function() {
 			this.thead = new Thead(this.options.htmlTag.thead);
-			this.$el.append(this.thead.render().$el);
+			this.$el.prepend(this.thead.render().$el);
 		},
 		createTbody: function() {
 			this.tbody = new Tbody({
@@ -33,14 +40,13 @@ define([
 		tagName: "thead",
 		render: function() {
 			this.$el.empty();
-			if(this.options.htmlTag && this.options.htmlTag.th)
-			{
+			if (this.options.htmlTag && this.options.htmlTag.th) {
 				this.createTh();
 			}
 			return this;
 		},
 		createTh: function() {
-			_.each(this.options.htmlTag.th, function(item){
+			_.each(this.options.htmlTag.th, function(item) {
 				this.addOne(item);
 			}, this);
 		},
@@ -60,49 +66,59 @@ define([
 
 	Tbody = Backbone.View.extend({
 		tagName: "tbody",
-		initialize: function(){
-			this.collection.on('reset', this.render, this);
+		initialize: function() {
 			this.collection.on('remove', this.remove, this);
 			this.collection.on('add', this.add, this);
 		},
 		render: function() {
 			this.$el.empty();
-			this.add(this.collection.models)
 			return this;
 		},
-		add: function(models){
-			_.each(models, function(model){
-				this.addOne(model)
-			}, this);
+		add: function(models) {
+			if (models.length>0){
+				_.each(models, function(model) {
+					this.addOne(model)
+				}, this);
+			} else
+				this.addOne(models);
 		},
-		addOne: function(model){
+		addOne: function(model) {
 			var tr = new Tr({
 				model: model,
 				htmlTag: this.options.htmlTag.tr.htmlTag
 			})
 			this.$el.append(tr.render().$el);
 		},
-		remove: function(models){
-
+		remove: function(models) {
+			if(models.length>0){
+				_.each(models, function(model){
+					this.removeOne(model);
+				});
+			}
+			else
+				this.removeOne(models);
 		},
-		removeOne: function(model){
+		removeOne: function(model) {
 
 		}
 	});
 
 	Tr = Backbone.View.extend({
 		tagName: "tr",
+		initialize: function(){
+			this.model.on('remove', this.remove, this);
+		},
 		render: function() {
 			this.$el.empty();
 			this.add();
 			return this;
 		},
-		add: function(){
-			_.each(this.options.htmlTag.td, function(field){
+		add: function() {
+			_.each(this.options.htmlTag.td, function(field) {
 				this.addOne(field);
 			}, this)
 		},
-		addOne: function(field){
+		addOne: function(field) {
 			field.model = this.model;
 			var td = new Td(field)
 			this.$el.append(td.render().$el);
@@ -111,8 +127,8 @@ define([
 
 	Td = Backbone.View.extend({
 		tagName: "td",
-		initialize: function(){
-			this.model.on('change:'+this.options.dataIndex, this.render, this);
+		initialize: function() {
+			this.model.on('change:' + this.options.dataIndex, this.render, this);
 		},
 		render: function() {
 			this.$el.html(this.model.get(this.options.dataIndex));

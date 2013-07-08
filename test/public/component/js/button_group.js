@@ -1,8 +1,7 @@
 "use strict";
 define.amd.jQuery = true;
-
 requirejs.config({
-	baseUrl: '../../../../../public/js',
+	baseUrl: '../../../../public/js',
 	paths: {
 		jquery: 'jquery-1.9.1.min',
 		underscore: 'underscore-min',
@@ -12,15 +11,11 @@ requirejs.config({
 	},
 	shim: {
 		'underscore': {
-			deps: ['jquery'],
-			exports: '_'
+			exports: '_',
+			deps: ['jquery']
 		},
 		'namespace': {
-			deps: ['underscore'],
-			export: '_'
-		},
-		'bootstrap': {
-			deps: ['jquery']
+			deps: ['underscore']
 		},
 		'backbone': {
 			deps: ['jquery', 'underscore', 'bootstrap', 'underscore'],
@@ -30,10 +25,18 @@ requirejs.config({
 });
 
 define([
-	'backbone',
-	'view.js'], function(Backbone, View) {
+		'backbone',
+		'../../../../public/component/button_group.js'
+], function(Backbone, View) {
 	$(function() {
-		this.view = new View();
-		$('body > .container').html(this.view.render().$el);
-	});
-});
+		var view = new View({
+			items: [{
+				
+			}, {
+				
+			}]
+		});
+
+		$('.container').html(view.render().$el);
+	})
+})

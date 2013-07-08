@@ -1,6 +1,8 @@
 "use strict";
 define.amd.jQuery = true;
+
 requirejs.config({
+	baseUrl: '../../../',
 	paths: {
 		jquery: '../../public/js/jquery-1.9.1.min',
 		underscore: '../../public/js/underscore-min',
@@ -11,7 +13,8 @@ requirejs.config({
 		eventAggregator: '../../public/js/eventAggregator',
 		jqBootstrapValidation: '../../public/js/jqbootstrapvalidation.min',
 		bootbox: '../../public/js/bootbox.min',
-		button: '../../public/../component/button'
+		componentButton: '../../public/component/button',
+		componentTable: '../../public/component/table'
 	},
 	shim: {
 		'underscore': {
@@ -20,38 +23,25 @@ requirejs.config({
 		},
 		'namespace': {
 			deps: ['underscore'],
-			exports: 'ns'
+			export: '_'
 		},
 		'bootstrap': {
 			deps: ['jquery']
 		},
-		'jqBootstrapValidation': {
-			deps: ['jquery']
-		},
-		'bootbox': {
-			deps: ['jquery', 'bootstrap']
-		},
 		'backbone': {
-			deps: ['jquery', 'underscore', 'bootstrap', 'namespace'],
+			deps: ['jquery', 'underscore', 'bootstrap', 'underscore'],
 			exports: 'Backbone'
-		},
-		'eventAggregator': {
-			deps: ['namespace', 'backbone'],
-			exports: 'eventAggregator'
 		}
 	}
 });
 
 define([
-		'backbone',
-		'router/router.js',
-		'eventAggregator'
-], function(Backbone, Router, eventAggregator) {
+	'backbone',
+	'view.js'], function(Backbone, View) {
 	$(function() {
-		var router = new Router();
-		Backbone.history.start({root: '/soft/payroll/app/payroll'});
-		eventAggregator.on("router:navigate", function(uri){
-			router.navigate(uri,{trigger: true, replace: true});
-		});
+
+		this.view = new View();
+		this.view.collection.fetch();
+		$('body > .container').html(this.view.render().$el);
 	});
 });

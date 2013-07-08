@@ -1,12 +1,12 @@
 define([
 		'backbone',
 		'namespace',
-		'fn',
-	URL_APP + 'module/login/model.js',
-		'text!../../app/payroll/module/login/template.html',
+		'eventAggregator',
+		'module/login/model.js',
+		'text!module/login/template.html',
 		'jqBootstrapValidation',
 		'bootbox'
-], function(Backbone, ns, fn, Model, template) {
+], function(Backbone, ns, eventAggregator, Model, template) {
 	ns.define('payroll.module.login');
 	payroll.module.login.View = Backbone.View.extend({
 		id: 'formLogin',
@@ -39,9 +39,9 @@ define([
 			this.model.fetch({
 				data: this.model.toJSON(),
 				success: function(model, response, options) {
-					if (response.success) {
-						fn.loadMenu();
-					} else
+					if (response.success)
+						eventAggregator.trigger('payroll_router_router:index');
+					else
 						bootbox.alert(ERROR_SERVER);
 				},
 				error: function(model, response, options) {

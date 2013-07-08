@@ -6,13 +6,10 @@ define([
 	function($, _, Backbone, ns){
 		ns.define('component');
 		component.button = Backbone.View.extend({
-			tagname: 'button',
+			tagName: 'button',
 			className: 'btn',
 			events:{
 				'click': "click"
-			},
-			initialize: function(){
-
 			},
 			render: function(){
 				var html = (typeof this.options.html == "function" && this.options.html(this.model, this) ) || this.options.html;
