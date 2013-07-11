@@ -13,7 +13,7 @@
 			if ($this->is_already_login())
 				$value = TRUE;
 			else
-			{	
+			{
 				if ($this->query_tbl_user_by_username_password($username, $password) == TRUE)
 				{
 					$this->session->set_userdata(array('username' => $username, 'password' => $password));

@@ -15,11 +15,21 @@
 			return $this->db->query($sql, array($this->session->userdata('username'), md5($this->session->userdata('password'))));
 		}
 
-		 function get_access_manajemen_user(){
-		 	$sql = "select  if(count(*) = 1, 1, 0) access, count(*) as test
-		 	from tbl_user where username=? and password=? and role='owner'";
-		 	echo $sql;
-		 	return $this->db->query($sql, array($this->session->userdata('username'), md5($this->session->userdata('passwword'))));
+		 function get_manajemen_user_access(){
+		 	$sql = "select username from tbl_user where username=? and password=? and role like '%owner%'";
+		 	$result = $this->db->query($sql, array($this->session->userdata('username'), md5($this->session->userdata('password')))); 
+		 	if ($result->num_rows()!=1){
+		 		$this->output
+				->set_content_type('application/json')
+				->set_status_header('400');
+				die(json_encode(array("success" => false, "message" => "anda tidak dapat hak akses ini", "short_message"=>"no access permited")));
+		 	}
+		}
+
+		function get_manajemen_user_data(){
+			return $this->db->query("select id, username, role, crud_golongan_kerja, crud_tunjangan, crud_departemen, crud_jabatan, 
+				crud_penambah_gaji, crud_pengurang_gaji, crud_PTKP, crud_status_karyawan, crud_mata_uang, crud_level_gaji, crud_bank, crud_jenis_pinjaman 
+				from tbl_user");
 		}
 	}
 ?>

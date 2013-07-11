@@ -41,7 +41,7 @@ define([
 	$(function() {
 
 		this.view = new View();
-		this.view.collection.fetch();
 		$('body > .container').html(this.view.render().$el);
+		this.view.collection.fetch();
 	});
 });

@@ -24,13 +24,14 @@
 		}
 
 		public function lists(){
-			$result = $this->Model_menu->get_access_manajemen_user();
-			if($result->num_rows() > 0){
+			$this->Model_menu->get_manajemen_user_access();
+
+			$query = $this->Model_menu->get_manajemen_user_data();
+			if($query->num_rows() > 0)
+			{
 				$this->output->set_status_header('200');
-				$arr = array("datas" => $result->row(), "success"=> true);
-				$this->output->set_output(json_encode($arr));
-			}else
-				die(json_encode(array("success" => false, "message" => "anda tidak dapat hak akses ini", "short_message"=>"no access permited")));
+				$this->output->set_output(json_encode($query->result()));
+			}
 		}
 	}
 ?>

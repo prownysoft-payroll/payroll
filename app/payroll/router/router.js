@@ -13,7 +13,6 @@ define([
 		routes: {
 			'': 'index',
 			'manajemen_user': 'manajemen_user',
-			'logout': 'logout',
 			'*default': 'default'
 		},
 		index: function() {
@@ -26,9 +25,6 @@ define([
 			var self = this;
 			if (this.menu && this.menu.model.get('role')) {
 				console.log("masuk manager");
-			} else if (this.menu && this.menu.model.get('role')){
-
-
 			} else {
 				this.checkAuth({
 					onAlreadyLoginLoadMenu: true,
@@ -47,17 +43,6 @@ define([
 					self.view.managemen_user = new View();
 				});
 			}
-		},
-		logout: function() {
-			$.ajax({
-				url: URL_SERVER + 'login/logout',
-				async: false
-			});
-			this.navigate('', {
-				trigger: false,
-				replace: false
-			});
-			this.loadLogin();
 		},
 		default: function() {
 			$('body').html("maaf, menu yang dicari belum tersedia");

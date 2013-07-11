@@ -62,8 +62,8 @@
         <% } %>
     </ul>
     <ul class="nav pull-right">
-        <% 
-                if (_.find(roles, function(role){return role == 'owner';})) 
+        <%
+            if (_.find(roles, function(role){return role == 'owner';}))
                 { %><li>
             <a class='manajemen_user' href='#manajemen_user'><i class="icon-group"></i> <span>Manajemen User</span></a>
         </li>
@@ -79,12 +79,9 @@
                 </li>
                 <li class='divider'></li>
                 <li>
-                    <a class='logout' href="#logout"><i class="icon-signout"></i> <span>Keluar</span></a>
+                    <a class='logout' href='#'><i class="icon-signout"></i> <span>Keluar</span></a>
                 </li>
             </ul>
-        </li>
-        <li>
-            
         </li>
     </ul>
 </div>
