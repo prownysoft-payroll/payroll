@@ -12,9 +12,14 @@ requirejs.config({
 		text: '../../public/js/text',
 		eventAggregator: '../../public/js/eventAggregator',
 		jqBootstrapValidation: '../../public/js/jqbootstrapvalidation.min',
+		create_update_delete: '../../public/js/create_update_delete',
+		loadCss: '../../public/js/loadCss',
 		bootbox: '../../public/js/bootbox.min',
-		componentButton: '../../public/component/button',
-		componentTable: '../../public/component/table'
+		Button: '../../public/component/button',
+		ButtonGroup: '../../public/component/buttongroup',
+		Table: '../../public/component/table',
+		Input: '../../public/component/input',
+		Label: '../../public/component/label'
 	},
 	shim: {
 		'underscore': {

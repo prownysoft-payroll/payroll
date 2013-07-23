@@ -5,7 +5,7 @@ define([
 	], function(_, Backbone, ns){
 		ns.define('module.management_user');
 		module.management_user.model = Backbone.Model.extend({
-			urlRoot: '/module/management_user/crud.php'
+			urlRoot: URL_SERVER + "manajemen_user/lists",
 		});
 		return module.management_user.model;
 	})

@@ -23,14 +23,18 @@
 				die(json_encode(array("success" => false, "message" =>"user anda tidak terdaftar lagi, harap menghubungi owner untuk mendaftar dan mendapatkan akses", "short_message"=>"")));
 		}
 
-		public function lists(){
+		public function lists($id = false){
 			$this->Model_menu->get_manajemen_user_access();
 
 			$query = $this->Model_menu->get_manajemen_user_data();
-			if($query->num_rows() > 0)
-			{
-				$this->output->set_status_header('200');
-				$this->output->set_output(json_encode($query->result()));
+			if ($id){
+				echo 'id';
+			}else{
+				if($query->num_rows() > 0)
+				{
+					$this->output->set_status_header('200');
+					$this->output->set_output(json_encode($query->result()));
+				}
 			}
 		}
 	}

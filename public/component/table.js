@@ -1,13 +1,14 @@
 define([
-		'jquery',
-		'underscore',
-		'backbone',
-		'namespace'
+	'jquery',
+	'underscore',
+	'backbone',
+	'namespace',
+	'bootstrap',
 ], function($, _, Backbone, ns) {
 	ns.define('component');
-	component.table = Backbone.View.extend({
+	component.Table = Backbone.View.extend({
 		tagName: 'table',
-		className: 'table',
+		className: 'table table-striped table-hover table-condensed',
 		initialize: function() {
 			this.collection.on('reset', function() {
 				this.tbody.remove();
@@ -36,7 +37,7 @@ define([
 		}
 	});
 
-	Thead = Backbone.View.extend({
+	var Thead = Backbone.View.extend({
 		tagName: "thead",
 		render: function() {
 			this.$el.empty();
@@ -56,7 +57,7 @@ define([
 		}
 	});
 
-	Th = Backbone.View.extend({
+	var Th = Backbone.View.extend({
 		tagName: "th",
 		render: function() {
 			this.$el.html(this.options.html);
@@ -64,7 +65,7 @@ define([
 		}
 	});
 
-	Tbody = Backbone.View.extend({
+	var Tbody = Backbone.View.extend({
 		tagName: "tbody",
 		initialize: function() {
 			this.collection.on('remove', this.remove, this);
@@ -75,7 +76,7 @@ define([
 			return this;
 		},
 		add: function(models) {
-			if (models.length>0){
+			if (models.length > 0) {
 				_.each(models, function(model) {
 					this.addOne(model)
 				}, this);
@@ -90,12 +91,11 @@ define([
 			this.$el.append(tr.render().$el);
 		},
 		remove: function(models) {
-			if(models.length>0){
-				_.each(models, function(model){
+			if (models.length > 0) {
+				_.each(models, function(model) {
 					this.removeOne(model);
 				});
-			}
-			else
+			} else
 				this.removeOne(models);
 		},
 		removeOne: function(model) {
@@ -103,9 +103,9 @@ define([
 		}
 	});
 
-	Tr = Backbone.View.extend({
+	var Tr = Backbone.View.extend({
 		tagName: "tr",
-		initialize: function(){
+		initialize: function() {
 			this.model.on('remove', this.remove, this);
 		},
 		render: function() {
@@ -119,22 +119,35 @@ define([
 			}, this)
 		},
 		addOne: function(field) {
-			field.model = this.model;
-			var td = new Td(field)
+			if (field)
+				field.model = this.model;
+
+			var td = new Td(field);
 			this.$el.append(td.render().$el);
 		}
 	});
 
-	Td = Backbone.View.extend({
+	var Td = Backbone.View.extend({
 		tagName: "td",
 		initialize: function() {
-			this.model.on('change:' + this.options.dataIndex, this.render, this);
+			if (this.options.dataIndex && this.model)
+				this.model.on('change:' + this.options.dataIndex, this.render, this);
+			else
+				this.$el.addClass('nodata');
+
+			if (this.options.events)
+				this.events = this.options.events
+
+			if(this.options.render)
+				this.render = this.options.render
 		},
 		render: function() {
-			this.$el.html(this.model.get(this.options.dataIndex));
+			if (this.options.dataIndex && this.model)
+				this.$el.html(this.model.get(this.options.dataIndex));
+
 			return this;
 		}
 	});
 
-	return component.table;
+	return component.Table;
 })
