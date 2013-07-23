@@ -1,0 +1,24 @@
+/* manajemen user begin*/
+.manajemen-user-table thead th:nth-child(n+4){
+	min-width: 78px;
+}
+.manajemen-user-table tbody tr td:nth-child(n+3) div > i{
+	margin-left: 10px;
+}
+.manajemen-user-table tbody tr td:nth-child(n+3){
+	padding-right: 10px;
+}
+.table.table-tbody-tr-td-dblclick.manajemen-user-table tbody tr td:nth-child(n+3) .popover i{
+	margin-left: 0px;
+}
+.table.table-tbody-tr-td-dblclick.manajemen-user-table .popover .btn-group .btn{
+	margin-left: 0px;
+}
+.table.table-tbody-tr-td-dblclick.manajemen-user-table .popover .margin-left-more{
+	margin-left: 14px;
+}
+
+.table.table-tbody-tr-td-dblclick.manajemen-user-table .text .icon-white{
+	visibility: hidden;
+}
+/* manajemen user end */
